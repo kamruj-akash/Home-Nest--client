@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import { useAuth } from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import MyPropertyCard from "./MyPropertyCard";
+import LoadingScreen from "../../components/LoadingScreen";
 
 const MyProperties = () => {
   const [myProperties, setProperties] = useState([]);
@@ -27,6 +28,11 @@ const MyProperties = () => {
       }
     });
   };
+  console.log(myProperties);
+
+  if (myProperties.length == 0) {
+    return <LoadingScreen />
+  }
 
   return (
     <>
