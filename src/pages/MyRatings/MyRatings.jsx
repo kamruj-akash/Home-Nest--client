@@ -2,6 +2,7 @@ import { MessageSquare, Star } from "lucide-react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import LoadingScreen from "../../components/LoadingScreen";
 import { useAuth } from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import MyRatingCard from "./MyRatingCard";
@@ -45,8 +46,13 @@ const MyRatings = () => {
       .then((data) => setReviews(data.data));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (reviews.length == 0) {
+    return <LoadingScreen />;
+  }
+
   return (
-    <section className="bg-gray-50 min-h-screen py-14">
+    <section className="bg-gray-50  py-14">
       <div className="max-w-6xl mx-auto px-6">
         <div className="mb-10 text-center">
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800">
