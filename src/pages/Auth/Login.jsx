@@ -7,7 +7,6 @@ const Login = () => {
   const { googleLogin, setLoading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location.state);
 
   const googleLoginHandler = () => {
     googleLogin()

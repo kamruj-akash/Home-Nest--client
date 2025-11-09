@@ -1,15 +1,8 @@
 import { Edit, Star, Trash2 } from "lucide-react";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 
-const MyRatingCard = ({ review }) => {
+const MyRatingCard = ({ review, deleteReviewHandler, handleEdit }) => {
   const { _id, propertyName, propertyImage, rating, reviewDesc, reviewDate } =
     review;
-  const axiosSecure = useAxiosSecure();
-
-  const deleteReviewHandler = (id) => {
-    
-    axiosSecure.delete(`/ratings/:${id}`);
-  };
 
   // Format the review date
   const formattedDate = new Date(reviewDate).toLocaleDateString("en-US", {
@@ -53,7 +46,10 @@ const MyRatingCard = ({ review }) => {
         </p>
 
         <div className="flex gap-3 mt-4">
-          <button className="btn btn-sm bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center gap-2">
+          <button
+            onClick={handleEdit}
+            className="btn btn-sm bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center gap-2"
+          >
             <Edit className="w-4 h-4" /> Edit
           </button>
           <button
