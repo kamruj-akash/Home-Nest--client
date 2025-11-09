@@ -1,18 +1,20 @@
 // src/components/Navbar.jsx
 import { Landmark, Menu } from "lucide-react";
+import toast from "react-hot-toast";
 import { Link } from "react-router";
+import { useAuth } from "../hooks/useAuth";
 import Container from "./Container";
 
 const Navbar = () => {
-  // console.log(user);
+  const { user, setUser, loading, setLoading, logOut } = useAuth();
 
-  //   const logOutHandler = () => {
-  //     // logOut()
-  //     //   .then(() => {
-  //     //     toast.success("Logout Successful"), setUser(null);
-  //     //   })
-  //     //   .catch((err) => console.log(err));
-  //   };
+  const logOutHandler = () => {
+    logOut()
+      .then(() => {
+        toast.success("Logout Successful"), setLoading(false), setUser(null);
+      })
+      .catch((err) => console.log(err));
+  };
 
   const navItems = (
     <>
@@ -78,16 +80,48 @@ const Navbar = () => {
             <LogOut className="w-6 h-6 text-primary" />
           </button> */}
 
-            <div className="hidden md:flex gap-1">
-              <Link to="/login" className="btn btn-sm bg-base-100">
-                Login
-              </Link>
-              <Link
-                to="/register"
-                className="btn btn-sm bg-[#0F5660] text-white"
-              >
-                Register
-              </Link>
+            <div className="flex justify-center items-center gap-1">
+              {loading ? (
+                <p>Loading...</p>
+              ) : user ? (
+                <div className="dropdown dropdown-end cursor-pointer">
+                  <div tabIndex={0} role="button">
+                    <img
+                      className="w-10 rounded-full h-10"
+                      src={user?.photoURL}
+                      alt={user?.displayName}
+                      title={user?.displayName}
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                  <ul
+                    tabIndex="-1"
+                    className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+                  >
+                    <li>
+                      <a>{user?.displayName}</a>
+                    </li>
+                    <li>
+                      <a>{user?.email}</a>
+                    </li>
+                    <li>
+                      <button onClick={logOutHandler}>LogOut</button>
+                    </li>
+                  </ul>
+                </div>
+              ) : (
+                <>
+                  <Link to="/login" className="btn btn-sm bg-base-100">
+                    Login
+                  </Link>
+                  <Link
+                    to="/register"
+                    className="btn btn-sm bg-[#0F5660] text-white"
+                  >
+                    Register
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router";
+import ProtectedRoute from "../components/ProtectedRoute";
 import MainLayout from "../layouts/MainLayout";
 import AddProperty from "../pages/AddProperty/AddProperty";
 import AllProperties from "../pages/AllProperties/AllProperties";
@@ -8,6 +9,7 @@ import Home from "../pages/Home/Home";
 import MyProperties from "../pages/MyProperties/MyProperties";
 import MyRatings from "../pages/MyRatings/MyRatings";
 import NotFound from "../pages/NotFound/NotFound";
+import PropertyDetails from "../pages/PropertyDetails/PropertyDetails";
 
 export const router = createBrowserRouter([
   {
@@ -16,12 +18,41 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: Home },
       { path: "all-properties", Component: AllProperties },
-      { path: "add-properties", Component: AddProperty },
-      { path: "my-properties", Component: MyProperties },
-      { path: "my-ratings", Component: MyRatings },
-      { path: "login", Component: Login },
-      { path: "register", Component: Register },
+      {
+        path: "add-properties",
+        element: (
+          <ProtectedRoute>
+            <AddProperty />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "my-properties",
+        element: (
+          <ProtectedRoute>
+            <MyProperties />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "my-ratings",
+        element: (
+          <ProtectedRoute>
+            <MyRatings />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/property/:id",
+        element: (
+          <ProtectedRoute>
+            <PropertyDetails />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
+  { path: "login", Component: Login },
+  { path: "register", Component: Register },
   { path: "*", Component: NotFound },
 ]);

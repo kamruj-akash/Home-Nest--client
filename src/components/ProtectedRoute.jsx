@@ -1,11 +1,19 @@
-import React from 'react';
+import { Navigate, useLocation } from "react-router";
+import { useAuth } from "../hooks/useAuth";
 
-const ProtectedRoute = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+const ProtectedRoute = ({ children }) => {
+  const { loading, user } = useAuth();
+  const location = useLocation();
+
+  if (loading) {
+    return;
+  }
+
+  if (!user) {
+    return <Navigate to={"/login"} state={location.pathname} />;
+  }
+
+  return children;
 };
 
 export default ProtectedRoute;

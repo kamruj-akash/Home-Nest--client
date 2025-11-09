@@ -14,7 +14,6 @@ const PropertyCard = ({ property }) => {
 
   return (
     <div className="card bg-base-100 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden rounded-xl border border-gray-100">
-      {/* Image section */}
       <figure className="relative">
         <img src={image} alt={name} className="h-56 w-full object-cover" />
         {isNew && (
@@ -26,7 +25,6 @@ const PropertyCard = ({ property }) => {
         )}
       </figure>
 
-      {/* Details section */}
       <div className="p-5 flex flex-col justify-between">
         <div>
           <h2 className="text-xl font-bold text-gray-800 mb-1">{name}</h2>
@@ -44,7 +42,6 @@ const PropertyCard = ({ property }) => {
           </div>
         </div>
 
-        {/* CTA Button */}
         <div className="mt-4">
           <Link
             to={`/property/${_id}`}
