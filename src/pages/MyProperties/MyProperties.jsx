@@ -28,10 +28,6 @@ const MyProperties = () => {
     });
   };
 
-  const HandleUpdateProperty = (id) => {
-    console.log(id);
-  };
-
   return (
     <>
       <section className="bg-gray-50 min-h-screen py-14">
@@ -81,7 +77,6 @@ const MyProperties = () => {
                 key={property._id}
                 property={property}
                 handleMyPropertyDelete={handleMyPropertyDelete}
-                HandleUpdateProperty={HandleUpdateProperty}
               />
             ))}
           </div>

@@ -81,7 +81,7 @@ const PropertyDetails = () => {
               Description
             </h3>
             <p className="text-gray-600 leading-relaxed">
-              {property?.shortDescription}
+              {property?.description}
             </p>
           </div>
 
@@ -142,8 +142,6 @@ const PropertyDetails = () => {
               </form>
             </div>
           </div>
-
-         
         </div>
       </div>
     </section>

@@ -10,6 +10,7 @@ import MyProperties from "../pages/MyProperties/MyProperties";
 import MyRatings from "../pages/MyRatings/MyRatings";
 import NotFound from "../pages/NotFound/NotFound";
 import PropertyDetails from "../pages/PropertyDetails/PropertyDetails";
+import UpdateProperty from "../pages/UpdateProperty/UpdateProperty";
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +48,14 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <PropertyDetails />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/update/:id",
+        element: (
+          <ProtectedRoute>
+            <UpdateProperty />
           </ProtectedRoute>
         ),
       },

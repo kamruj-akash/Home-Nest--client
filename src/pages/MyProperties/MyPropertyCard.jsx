@@ -1,11 +1,7 @@
 import { ClockCheck, Edit, Eye, MapPin, Trash2 } from "lucide-react";
 import { Link } from "react-router";
 
-const PropertyCard = ({
-  property,
-  handleMyPropertyDelete,
-  HandleUpdateProperty,
-}) => {
+const PropertyCard = ({ property, handleMyPropertyDelete }) => {
   const { _id, name, price, location, category, image, postedDate } = property;
 
   return (
@@ -50,12 +46,12 @@ const PropertyCard = ({
           <Eye className="w-4 h-4" /> View
         </Link>
 
-        <button
-          onClick={() => HandleUpdateProperty(_id)}
+        <Link
+          to={`/update/${_id}`}
           className="cursor-pointer flex-1 flex items-center justify-center gap-2 py-3 text-gray-700 font-medium hover:bg-gray-100 transition"
         >
           <Edit className="w-4 h-4" /> Update
-        </button>
+        </Link>
 
         <button
           onClick={() => handleMyPropertyDelete(_id)}
