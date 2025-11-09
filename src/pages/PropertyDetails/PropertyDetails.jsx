@@ -1,18 +1,52 @@
-import { Calendar, Mail, MapPin, Star, User } from "lucide-react";
-import { useEffect } from "react";
+import { Rating } from "@smastrom/react-rating";
+import "@smastrom/react-rating/style.css";
+import { Calendar, Mail, MapPin, User } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import { useAuth } from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const PropertyDetails = () => {
+  const [rating, setRating] = useState(0);
+  const { user } = useAuth();
+  const [property, setProperty] = useState([]);
+  const axiosSecure = useAxiosSecure();
+  const { id: paramsId } = useParams();
 
-    useEffect(()=>{
-        
-    },[])
+  useEffect(() => {
+    axiosSecure.get(`/property/${paramsId}`).then((data) => {
+      setProperty(data.data);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
+  const reviewSubmitHandler = (e) => {
+    e.preventDefault();
+    const submissionTime = new Date().toISOString();
+    const reviewDesc = e.target.reviewInput.value;
+    const newReview = {
+      reviewDesc,
+      rating,
+      reviewer: user?.displayName,
+      reviewerEmail: user?.email,
+      propertyName: property?.name,
+      propertyImage: property?.image,
+      reviewDate: submissionTime,
+    };
+
+    axiosSecure.post("/ratings", newReview).then((data) => console.log(data));
+    setRating(0);
+    e.target.reset();
+  };
+
+  // user?.displayName
+  // user?.email
   return (
     <section className="bg-gray-50 min-h-screen py-16">
       <div className="max-w-6xl mx-auto px-6">
         <div className="w-full h-[400px] rounded-2xl overflow-hidden shadow-lg mb-10">
           <img
-            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80"
+            src={property?.image}
             alt="Property"
             className="w-full h-full object-cover"
           />
@@ -22,17 +56,19 @@ const PropertyDetails = () => {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between border-b border-gray-200 pb-6 mb-6">
             <div>
               <h2 className="text-3xl font-bold text-gray-800">
-                Banani Studio Loft
+                {property?.name}
               </h2>
               <p className="text-gray-500 flex items-center gap-1 mt-1">
                 <MapPin className="w-4 h-4 text-[#0F5660]" />
-                Banani, Dhaka
+                {property?.location}
               </p>
             </div>
 
             <div className="mt-4 md:mt-0 text-right">
-              <p className="text-2xl font-bold text-[#0F5660]">৳30,000/month</p>
-              <p className="text-sm text-gray-500">For Rent</p>
+              <p className="text-2xl font-bold text-[#0F5660]">
+                ৳{property?.price}/month
+              </p>
+              <p className="text-sm text-gray-500">For {property?.category}</p>
             </div>
           </div>
 
@@ -41,10 +77,7 @@ const PropertyDetails = () => {
               Description
             </h3>
             <p className="text-gray-600 leading-relaxed">
-              This cozy studio loft in Banani is perfect for professionals
-              seeking a modern lifestyle. Within walking distance to Banani
-              market, this property features an open-plan design, full-length
-              windows, and plenty of natural light.
+              {property?.shortDescription}
             </p>
           </div>
 
@@ -54,22 +87,55 @@ const PropertyDetails = () => {
             </h3>
             <div className="flex items-center gap-4">
               <img
-                src="https://images.unsplash.com/photo-1603415526960-f7e0328f4f52?auto=format&fit=crop&w=400&q=80"
+                src={property?.owner_photoURL}
                 alt="Owner"
                 className="w-14 h-14 rounded-full object-cover border-2 border-[#0F5660]"
               />
               <div>
                 <h4 className="text-gray-800 font-medium flex items-center gap-2">
-                  <User className="w-4 h-4 text-[#0F5660]" /> Tania Alam
+                  <User className="w-4 h-4 text-[#0F5660]" />{" "}
+                  {property?.owner_name}
                 </h4>
                 <p className="text-gray-500 text-sm flex items-center gap-1">
-                  <Mail className="w-4 h-4 text-[#0F5660]" /> tania@example.com
+                  <Mail className="w-4 h-4 text-[#0F5660]" />{" "}
+                  {property?.owner_email}
                 </p>
                 <p className="text-gray-400 text-xs mt-1 flex items-center gap-1">
-                  <Calendar className="w-4 h-4 text-[#0F5660]" /> Posted on Nov
-                  2, 2025
+                  <Calendar className="w-4 h-4 text-[#0F5660]" /> Posted on{" "}
+                  {property?.postedDate}
                 </p>
               </div>
+            </div>
+          </div>
+
+          <div>
+            <div className="bg-gray-50 rounded-2xl shadow-sm p-8 mt-10">
+              <h3 className="text-lg font-semibold text-gray-800 mb-4">
+                Share your experience
+              </h3>
+
+              {/* Rating Stars */}
+              <form onSubmit={reviewSubmitHandler}>
+                <div className="flex gap-5 mb-5">
+                  <Rating
+                    style={{ maxWidth: 180 }}
+                    value={rating}
+                    onChange={setRating}
+                    isRequired={true}
+                  />
+                </div>
+
+                {/* Review Input */}
+                <textarea
+                  required
+                  name="reviewInput"
+                  className="w-full h-32 p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0F5660] text-gray-700 placeholder-gray-400"
+                  placeholder="Tell us about your thoughts..."
+                ></textarea>
+                <button className="btn bg-[#0F5660] hover:bg-[#134a51] text-white font-semibold rounded-lg px-8">
+                  Submit Review
+                </button>
+              </form>
             </div>
           </div>
 
@@ -77,15 +143,6 @@ const PropertyDetails = () => {
             <h3 className="text-lg font-semibold text-gray-800 mb-4">
               Ratings & Reviews
             </h3>
-
-            <div className="flex items-center gap-2 mb-6">
-              <Star className="w-6 h-6 text-yellow-500" />
-              <Star className="w-6 h-6 text-yellow-500" />
-              <Star className="w-6 h-6 text-yellow-500" />
-              <Star className="w-6 h-6 text-yellow-500" />
-              <Star className="w-6 h-6 text-gray-300" />
-              <span className="text-gray-600 ml-2 text-sm">(4.0 / 5)</span>
-            </div>
 
             <div className="bg-gray-50 border border-gray-200 rounded-lg p-5 mb-4">
               <div className="flex items-center justify-between mb-2">
