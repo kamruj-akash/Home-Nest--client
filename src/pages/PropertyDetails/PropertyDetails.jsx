@@ -27,6 +27,7 @@ const PropertyDetails = () => {
     const newReview = {
       reviewDesc,
       rating,
+      location: property?.location,
       reviewer: user?.displayName,
       reviewerEmail: user?.email,
       propertyName: property?.name,
