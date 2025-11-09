@@ -1,6 +1,7 @@
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import Container from "../../components/Container";
+import LoadingScreen from "../../components/LoadingScreen";
 import PropertyCard from "../../components/PropertyCard";
 import useAxios from "../../hooks/useAxios";
 
@@ -11,6 +12,11 @@ const AllProperties = () => {
   useEffect(() => {
     axios.get("/all-properties").then((data) => setProperties(data.data));
   }, []);
+
+  if (properties.length == 0) {
+    return <LoadingScreen />;
+  }
+
   return (
     <Container>
       <section className="bg-gray-50 py-12">

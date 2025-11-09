@@ -2,6 +2,7 @@ import { EraserIcon, Home } from "lucide-react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router";
+import LoadingScreen from "../../components/LoadingScreen";
 import { useAuth } from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import MyPropertyCard from "./MyPropertyCard";
@@ -27,6 +28,10 @@ const MyProperties = () => {
       }
     });
   };
+
+  if (myProperties.length == 0) {
+    return <LoadingScreen />;
+  }
 
   return (
     <>
