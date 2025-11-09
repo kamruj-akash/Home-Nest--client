@@ -6,15 +6,37 @@ import {
   Image,
   MapPin,
 } from "lucide-react";
+import toast from "react-hot-toast";
 import { useAuth } from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const AddProperty = () => {
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
 
   const handleAddProperty = (e) => {
     e.preventDefault();
-    const newProperty = {};
-    console.log(newProperty);
+    const form = e.target;
+    const postedData = new Date().toISOString();
+    const newProperty = {
+      name: e.target.name.value,
+      description: e.target.description.value,
+      category: e.target.category.value,
+      location: e.target.location.value,
+      price: e.target.price.value,
+      image: e.target.image.value,
+      owner_name: user.displayName,
+      owner_email: user.email,
+      owner_photoURL: user.photoURL,
+      postedDate: postedData,
+    };
+
+    axiosSecure
+      .post("/properties", newProperty)
+      .then(() => {
+        toast.success("Property added success!"), form.reset();
+      })
+      .catch(() => toast.error("Something went wrong!"));
   };
 
   return (
@@ -38,6 +60,8 @@ const AddProperty = () => {
               <Home className="w-4 h-4 text-[#0F5660]" /> Property Name
             </label>
             <input
+              required
+              name="name"
               type="text"
               placeholder="e.g. Bashundhara Family Duplex"
               className="input input-bordered w-full focus:ring-2 focus:ring-[#0F5660] focus:border-[#0F5660]"
@@ -50,6 +74,8 @@ const AddProperty = () => {
               <AlignLeft className="w-4 h-4 text-[#0F5660]" /> Description
             </label>
             <textarea
+              required
+              name="description"
               placeholder="Write a short description about your property..."
               className="textarea textarea-bordered h-28 w-full focus:ring-2 focus:ring-[#0F5660] focus:border-[#0F5660]"
             ></textarea>
@@ -60,7 +86,11 @@ const AddProperty = () => {
             <label className="label font-medium text-gray-700 flex items-center gap-2">
               <FolderPlus className="w-4 h-4 text-[#0F5660]" /> Category
             </label>
-            <select className="select select-bordered w-full focus:ring-2 focus:ring-[#0F5660] focus:border-[#0F5660]">
+            <select
+              required
+              name="category"
+              className="select select-bordered w-full focus:ring-2 focus:ring-[#0F5660] focus:border-[#0F5660]"
+            >
               <option>Choose a category</option>
               <option>Rent</option>
               <option>Sale</option>
@@ -75,6 +105,8 @@ const AddProperty = () => {
               <DollarSign className="w-4 h-4 text-[#0F5660]" /> Price (৳)
             </label>
             <input
+              required
+              name="price"
               type="number"
               placeholder="e.g. 30000"
               className="input input-bordered w-full focus:ring-2 focus:ring-[#0F5660] focus:border-[#0F5660]"
@@ -87,6 +119,8 @@ const AddProperty = () => {
               <MapPin className="w-4 h-4 text-[#0F5660]" /> Location
             </label>
             <input
+              required
+              name="location"
               type="text"
               placeholder="e.g. Bashundhara, Dhaka"
               className="input input-bordered w-full focus:ring-2 focus:ring-[#0F5660] focus:border-[#0F5660]"
@@ -99,6 +133,8 @@ const AddProperty = () => {
               <Image className="w-4 h-4 text-[#0F5660]" /> Image URL
             </label>
             <input
+              required
+              name="image"
               type="text"
               placeholder="https://your-image-link.com"
               className="input input-bordered w-full focus:ring-2 focus:ring-[#0F5660] focus:border-[#0F5660]"
@@ -144,3 +180,14 @@ const AddProperty = () => {
 };
 
 export default AddProperty;
+
+/** "name": "Banani Studio Loft",
+"category": "Rent",
+"shortDescription": "Cozy studio loft ideal for professionals — walk to Banani market.",
+"location": "Banani, Dhaka",
+"price": 30000,
+"image": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1000&q=80",
+"owner_name": "Tania Alam",
+"owner_email": "tania@example.com",
+"owner_photoURL": "https://randomuser.me/api/portraits/women/65.jpg",
+"postedDate": "2025-11-02T12:00:00Z" */

@@ -2,6 +2,7 @@ import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { Calendar, Mail, MapPin, User } from "lucide-react";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useParams } from "react-router";
 import { useAuth } from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -35,7 +36,9 @@ const PropertyDetails = () => {
       reviewDate: submissionTime,
     };
 
-    axiosSecure.post("/ratings", newReview).then((data) => console.log(data));
+    axiosSecure
+      .post("/ratings", newReview)
+      .then(() => toast.success("Review Submitted"));
     setRating(0);
     e.target.reset();
   };
@@ -140,33 +143,7 @@ const PropertyDetails = () => {
             </div>
           </div>
 
-          <div className="border-t border-gray-200 pt-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">
-              Ratings & Reviews
-            </h3>
-
-            <div className="bg-gray-50 border border-gray-200 rounded-lg p-5 mb-4">
-              <div className="flex items-center justify-between mb-2">
-                <p className="font-medium text-gray-800">Arif Hasan</p>
-                <p className="text-sm text-gray-500">⭐ 5</p>
-              </div>
-              <p className="text-gray-600 text-sm">
-                “Great location and very comfortable! The agent was super
-                helpful and professional throughout the process.”
-              </p>
-            </div>
-
-            <div className="bg-gray-50 border border-gray-200 rounded-lg p-5">
-              <div className="flex items-center justify-between mb-2">
-                <p className="font-medium text-gray-800">Nadia Rahman</p>
-                <p className="text-sm text-gray-500">⭐ 4</p>
-              </div>
-              <p className="text-gray-600 text-sm">
-                “Loved the space! Just wished there was a little more parking
-                space. Otherwise perfect.”
-              </p>
-            </div>
-          </div>
+         
         </div>
       </div>
     </section>
