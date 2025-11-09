@@ -1,5 +1,6 @@
 import { EraserIcon, Home } from "lucide-react";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { Link } from "react-router";
 import { useAuth } from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -16,6 +17,21 @@ const MyProperties = () => {
       .then((data) => setProperties(data.data));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
+
+  const handleMyPropertyDelete = (id) => {
+    axiosSecure.delete(`/property/${id}`).then((data) => {
+      if (data.data.deletedCount) {
+        toast.success("Property is Deleted!");
+        const resData = myProperties.filter((item) => item._id != id);
+        setProperties(resData);
+      }
+    });
+  };
+
+  const HandleUpdateProperty = (id) => {
+    console.log(id);
+  };
+
   return (
     <>
       <section className="bg-gray-50 min-h-screen py-14">
@@ -61,7 +77,12 @@ const MyProperties = () => {
           )}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {myProperties.map((property) => (
-              <MyPropertyCard key={property._id} property={property} />
+              <MyPropertyCard
+                key={property._id}
+                property={property}
+                handleMyPropertyDelete={handleMyPropertyDelete}
+                HandleUpdateProperty={HandleUpdateProperty}
+              />
             ))}
           </div>
         </div>

@@ -38,7 +38,7 @@ const AllProperties = () => {
 
             <div className="mt-4 md:mt-0">
               <select className="select select-bordered w-full max-w-xs text-gray-700 font-medium">
-                <option selected>Sort by: Newest</option>
+                <option>Sort by: Newest</option>
                 <option>Sort by: Price (Low to High)</option>
                 <option>Sort by: Price (High to Low)</option>
                 <option>Sort by: Oldest</option>
