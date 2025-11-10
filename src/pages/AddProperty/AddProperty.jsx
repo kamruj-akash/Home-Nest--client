@@ -7,12 +7,14 @@ import {
   MapPin,
 } from "lucide-react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 import { useAuth } from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const AddProperty = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate(null);
 
   const handleAddProperty = (e) => {
     e.preventDefault();
@@ -34,7 +36,9 @@ const AddProperty = () => {
     axiosSecure
       .post("/properties", newProperty)
       .then(() => {
-        toast.success("Property added success!"), form.reset();
+        toast.success("Property added success!"),
+          navigate("/all-properties"),
+          form.reset();
       })
       .catch(() => toast.error("Something went wrong!"));
   };

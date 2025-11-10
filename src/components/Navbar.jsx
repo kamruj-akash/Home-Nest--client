@@ -2,6 +2,7 @@
 import { Landmark, Menu, Moon, Sun, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { FallingLines } from "react-loader-spinner";
 import { Link, NavLink } from "react-router";
 import { useAuth } from "../hooks/useAuth";
 import Container from "./Container";
@@ -132,7 +133,12 @@ const Navbar = () => {
           <div className="navbar-end">
             <div className="flex justify-center items-center gap-1">
               {loading ? (
-                <p>Loading...</p>
+                <FallingLines
+                  color="#0e5660"
+                  width="40"
+                  visible={true}
+                  ariaLabel="falling-circles-loading"
+                />
               ) : user ? (
                 <div className="dropdown dropdown-end cursor-pointer">
                   <div tabIndex={0} role="button">
