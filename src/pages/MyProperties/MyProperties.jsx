@@ -1,6 +1,7 @@
 import { EraserIcon, Home } from "lucide-react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { Bars } from "react-loader-spinner";
 import { Link } from "react-router";
 import { useAuth } from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -11,10 +12,13 @@ const MyProperties = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    axiosSecure
-      .get(`/property?email=${user?.email}`)
-      .then((data) => setProperties(data.data));
+    setLoading(true);
+    axiosSecure.get(`/property?email=${user?.email}`).then((data) => {
+      setProperties(data.data), setLoading(false);
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
@@ -42,33 +46,45 @@ const MyProperties = () => {
           </div>
           {myProperties.length == 0 && (
             <div className=" flex flex-col items-center justify-center text-center bg-gray-50 border border-gray-200 rounded-2xl py-16 px-6 shadow-sm">
-              {/* Icon Section */}
-              <div className="relative mb-6">
-                <div className="w-20 h-20 bg-[#E7F3F4] rounded-full flex items-center justify-center mx-auto">
-                  <Home className="w-10 h-10 text-[#0F5660]" />
+              {loading ? (
+                <div>
+                  <Bars
+                    height="80"
+                    width="80"
+                    color="#0E5660"
+                    ariaLabel="bars-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                  />
                 </div>
-                <div className="absolute -bottom-2 right-[35%] bg-white rounded-full p-1 shadow-md">
-                  <EraserIcon className="w-5 h-5 text-[#0F5660]" />
+              ) : (
+                <div>
+                  <div className="relative mb-6">
+                    <div className="w-20 h-20 bg-[#E7F3F4] rounded-full flex items-center justify-center mx-auto">
+                      <Home className="w-10 h-10 text-[#0F5660]" />
+                    </div>
+                    <div className="absolute bottom-0 right-[35%] bg-white rounded-full p-1 shadow-md">
+                      <EraserIcon className="w-5 h-5 text-[#0F5660]" />
+                    </div>
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                    No Property Added Yet
+                  </h3>
+                  <p className="text-gray-500 max-w-md mx-auto mb-8">
+                    You haven’t added your properties yet. Once you add a
+                    properties for sale/rent, it’ll show up here. Your
+                    properties helps others find their dream home!
+                  </p>
+
+                  <Link
+                    to={"/add-properties"}
+                    className="btn bg-[#0F5660] hover:bg-[#134a51] text-white font-semibold px-8 rounded-lg"
+                  >
+                    Add Your First Property
+                  </Link>
                 </div>
-              </div>
-
-              {/* Text Section */}
-              <h3 className="text-2xl font-bold text-gray-800 mb-2">
-                No Property Added Yet
-              </h3>
-              <p className="text-gray-500 max-w-md mx-auto mb-8">
-                You haven’t added your properties yet. Once you add a properties
-                for sale/rent, it’ll show up here. Your properties helps others
-                find their dream home!
-              </p>
-
-              {/* CTA Button */}
-              <Link
-                to={"/add-properties"}
-                className="btn bg-[#0F5660] hover:bg-[#134a51] text-white font-semibold px-8 rounded-lg"
-              >
-                Add Your First Property
-              </Link>
+              )}
             </div>
           )}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">

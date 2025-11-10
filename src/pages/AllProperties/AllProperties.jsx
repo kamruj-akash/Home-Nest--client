@@ -1,6 +1,5 @@
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
-import Container from "../../components/Container";
 import LoadingScreen from "../../components/LoadingScreen";
 import PropertyCard from "../../components/PropertyCard";
 import useAxios from "../../hooks/useAxios";
@@ -18,9 +17,9 @@ const AllProperties = () => {
   }
 
   return (
-    <Container>
+    <div className="max-w-7xl mx-auto ">
       <section className="bg-gray-50 py-12">
-        <div className="max-w-6xl mx-auto px-6">
+        <div >
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
             <div>
               <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900">
@@ -59,7 +58,7 @@ const AllProperties = () => {
           <PropertyCard key={property._id} property={property} />
         ))}
       </div>
-    </Container>
+    </div>
   );
 };
 

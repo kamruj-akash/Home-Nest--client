@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Puff } from "react-loader-spinner";
@@ -16,7 +17,7 @@ const FeaturedProperties = () => {
   }, []);
 
   return (
-    <div className="my-30">
+    <div className="my-30 max-w-7xl mx-auto">
       <h1 className="text-center font-semibold text-2xl md:text-5xl mb-10">
         Newest Properties on the Market
       </h1>

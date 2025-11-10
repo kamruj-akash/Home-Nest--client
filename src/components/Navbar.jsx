@@ -1,12 +1,14 @@
 // src/components/Navbar.jsx
-import { Landmark, Menu } from "lucide-react";
+import { Landmark, Menu, X } from "lucide-react";
 import toast from "react-hot-toast";
 import { Link, NavLink } from "react-router";
 import { useAuth } from "../hooks/useAuth";
 import Container from "./Container";
+import { useState } from "react";
 
 const Navbar = () => {
   const { user, setUser, loading, setLoading, logOut } = useAuth();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const logOutHandler = () => {
     logOut()
@@ -154,8 +156,25 @@ const Navbar = () => {
                 </>
               )}
             </div>
+            <button
+              className="md:hidden btn btn-ghost btn-circle"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? (
+                <X className="w-6 h-6 text-[#0F5660]" />
+              ) : (
+                <Menu className="w-6 h-6 text-[#0F5660]" />
+              )}
+            </button>
           </div>
         </div>
+        {isMenuOpen && (
+          <div className="md:hidden bg-white border-t border-gray-200 shadow-sm animate-slideDown">
+            <ul className="flex flex-col gap-3 py-3 px-6 text-gray-700 font-medium">
+              {navItems}
+            </ul>
+          </div>
+        )}
       </Container>
     </div>
   );
