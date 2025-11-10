@@ -12,6 +12,7 @@ const MyRatings = () => {
   const { user } = useAuth();
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [catchError, setCatchError] = useState(null);
 
   const deleteReviewHandler = (id) => {
     Swal.fire({
@@ -43,20 +44,23 @@ const MyRatings = () => {
 
   useEffect(() => {
     setLoading(true);
-    axiosSecure.get(`/ratings?email=${user?.email}`).then((data) => {
-      setReviews(data.data), setLoading(false);
-    });
+    axiosSecure
+      .get(`/ratings?email=${user?.email}`)
+      .then((data) => {
+        setReviews(data.data), setLoading(false);
+      })
+      .catch((err) => setCatchError(err));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <section className="bg-gray-50  py-14">
+    <section className="bg-base-100  py-14">
       <div className="max-w-6xl mx-auto px-6">
         <div className="mb-10 text-center">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-base-content">
             My Ratings & Reviews
           </h2>
-          <p className="text-gray-500 mt-2">
+          <p className="text-base-content mt-2">
             See all the properties you’ve reviewed and your feedback history.
           </p>
         </div>
@@ -64,7 +68,7 @@ const MyRatings = () => {
         {/* Review Cards */}
         <div>
           {reviews.length == 0 ? (
-            <div className="flex flex-col items-center justify-center text-center bg-gray-50 border border-gray-200 rounded-2xl py-16 px-6 shadow-sm">
+            <div className="flex flex-col items-center justify-center text-center bg-base-100 border border-gray-200 rounded-2xl py-16 px-6 shadow-sm">
               {loading ? (
                 <div>
                   <Bars
@@ -88,7 +92,7 @@ const MyRatings = () => {
                     </div>
                   </div>
 
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                  <h3 className="text-2xl font-bold text-base-content mb-2">
                     No Reviews Yet
                   </h3>
                   <p className="text-gray-500 max-w-md mx-auto mb-8">

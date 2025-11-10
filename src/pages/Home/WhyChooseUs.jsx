@@ -25,7 +25,7 @@ const WhyChooseUs = () => {
   return (
     <section className="py-16  text-center">
       <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">
+        <h2 className="text-3xl md:text-4xl font-bold text-base-content mb-3">
           Why HomeNest?
         </h2>
         <p className="text-gray-500 mb-12 max-w-2xl mx-auto">
@@ -37,15 +37,15 @@ const WhyChooseUs = () => {
           {items.map((item) => (
             <div
               key={item.id}
-              className="flex flex-col items-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300"
+              className="flex flex-col items-center p-6 bg-base-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300"
             >
               <div className="bg-[#E7F3F4] p-4 rounded-full mb-4">
                 {item.icon}
               </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">
+              <h3 className="text-xl font-semibold text-base-content mb-2">
                 {item.title}
               </h3>
-              <p className="text-gray-500 text-sm leading-relaxed">
+              <p className="text-base-content text-sm leading-relaxed">
                 {item.desc}
               </p>
             </div>

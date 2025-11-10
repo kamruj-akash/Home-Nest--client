@@ -40,8 +40,8 @@ const AddProperty = () => {
   };
 
   return (
-    <section className="bg-gray-50 min-h-screen py-14">
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-md p-8 md:p-10 border border-gray-100">
+    <section className="bg-base-100 min-h-screen py-14">
+      <div className="max-w-4xl mx-auto bg-base-200 rounded-2xl shadow-md p-8 md:p-10 border ">
         {/* Header */}
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold text-[#0F5660] mb-2">
@@ -151,7 +151,7 @@ const AddProperty = () => {
                 type="text"
                 readOnly
                 defaultValue={user.displayName}
-                className="input input-bordered w-full bg-gray-100 cursor-not-allowed"
+                className="input input-bordered w-full bg-base-100 cursor-not-allowed"
               />
             </div>
             <div className="form-control">
@@ -162,7 +162,7 @@ const AddProperty = () => {
                 type="email"
                 readOnly
                 defaultValue={user.email}
-                className="input input-bordered w-full bg-gray-100 cursor-not-allowed"
+                className="input input-bordered w-full bg-base-100 cursor-not-allowed"
               />
             </div>
           </div>
@@ -180,14 +180,3 @@ const AddProperty = () => {
 };
 
 export default AddProperty;
-
-/** "name": "Banani Studio Loft",
-"category": "Rent",
-"shortDescription": "Cozy studio loft ideal for professionals — walk to Banani market.",
-"location": "Banani, Dhaka",
-"price": 30000,
-"image": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1000&q=80",
-"owner_name": "Tania Alam",
-"owner_email": "tania@example.com",
-"owner_photoURL": "https://randomuser.me/api/portraits/women/65.jpg",
-"postedDate": "2025-11-02T12:00:00Z" */

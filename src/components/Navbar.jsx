@@ -1,14 +1,25 @@
 // src/components/Navbar.jsx
-import { Landmark, Menu, X } from "lucide-react";
+import { Landmark, Menu, Moon, Sun, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, NavLink } from "react-router";
 import { useAuth } from "../hooks/useAuth";
 import Container from "./Container";
-import { useState } from "react";
 
 const Navbar = () => {
   const { user, setUser, loading, setLoading, logOut } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  useEffect(() => {
+    const documentHtml = document.querySelector("html");
+    documentHtml.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const handleThemeChange = (isChecked) => {
+    setTheme(isChecked ? "dark" : "light");
+  };
 
   const logOutHandler = () => {
     logOut()
@@ -17,7 +28,6 @@ const Navbar = () => {
       })
       .catch((err) => toast.error(err.message));
   };
-
   const navItems = (
     <>
       <li>
@@ -73,13 +83,21 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="shadow-xs">
+    <div className="shadow-xs ">
       <Container>
-        <div className="navbar bg-white  px-4 py-2 top-0 z-50">
+        <div className="navbar  px-4 py-2 top-0 z-50">
           <div className="navbar-start">
-            {/* Logo */}
+            <button
+              className="md:hidden btn btn-ghost btn-circle me-1"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? (
+                <X className="w-6 h-6 text-[#0F5660]" />
+              ) : (
+                <Menu className="w-6 h-6 text-[#0F5660]" />
+              )}
+            </button>
             <Link to="/" className="flex items-center gap-2">
-              {/* Use your own logo SVG or daisyUI avatar */}
               <div className="avatar placeholder">
                 <div className="bg-teal-800 text-white rounded-full w-8">
                   <span className="text-lg font-bold">
@@ -93,7 +111,6 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Navbar End */}
           <div className="navbar-center hidden md:flex items-center gap-2">
             <ul className="menu menu-horizontal px-1 hidden md:flex">
               {navItems}
@@ -155,17 +172,21 @@ const Navbar = () => {
                   </Link>
                 </>
               )}
+              <div>
+                <label className="swap swap-rotate cursor-pointer ms-2">
+                  <input
+                    onChange={(e) => handleThemeChange(e.target.checked)}
+                    type="checkbox"
+                    className="theme-controller"
+                  />
+                  {theme == "light" ? (
+                    <Sun className=" h-7 w-7" />
+                  ) : (
+                    <Moon className=" h-7 w-7" />
+                  )}
+                </label>
+              </div>
             </div>
-            <button
-              className="md:hidden btn btn-ghost btn-circle"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? (
-                <X className="w-6 h-6 text-[#0F5660]" />
-              ) : (
-                <Menu className="w-6 h-6 text-[#0F5660]" />
-              )}
-            </button>
           </div>
         </div>
         {isMenuOpen && (

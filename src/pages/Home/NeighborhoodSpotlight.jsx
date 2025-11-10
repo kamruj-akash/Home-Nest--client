@@ -26,13 +26,14 @@ const NeighborhoodSpotlight = () => {
   ];
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-base-100">
       <div className="max-w-6xl mx-auto px-6 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">
+        <h2 className="text-3xl md:text-4xl font-bold text-base-content mb-3">
           Neighborhood Spotlight
         </h2>
         <p className="text-gray-500 mb-10 max-w-2xl mx-auto">
-          Explore some of the most desirable neighborhoods to live, invest, or rent in Bangladesh.
+          Explore some of the most desirable neighborhoods to live, invest, or
+          rent in Bangladesh.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -50,7 +51,9 @@ const NeighborhoodSpotlight = () => {
               <div className="absolute inset-0 flex flex-col items-center justify-center text-white px-4">
                 <MapPin className="w-6 h-6 mb-2 text-[#FF6B5A]" />
                 <h3 className="text-2xl font-bold mb-1">{city.name}</h3>
-                <p className="text-gray-200 text-sm">Avg. Price: {city.avgPrice}</p>
+                <p className="text-gray-200 text-sm">
+                  Avg. Price: {city.avgPrice}
+                </p>
               </div>
             </div>
           ))}

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import LoadingScreen from "../../components/LoadingScreen";
@@ -18,11 +19,11 @@ const AllProperties = () => {
 
   return (
     <div className="max-w-7xl mx-auto ">
-      <section className="bg-gray-50 py-12">
-        <div >
+      <section className="bg-base-100 py-12">
+        <div>
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
             <div>
-              <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900">
+              <h1 className="text-3xl md:text-4xl font-extrabold text-base-content">
                 Explore Our Listings
               </h1>
               <p className="text-gray-500 mt-2">
@@ -37,7 +38,7 @@ const AllProperties = () => {
               <input
                 type="text"
                 placeholder="Search by property name or address..."
-                className="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-100 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0F5660] focus:bg-white transition"
+                className="w-full pl-12 pr-4 py-3 rounded-lg bg-base-300 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0F5660] "
               />
             </div>
 
@@ -53,7 +54,7 @@ const AllProperties = () => {
         </div>
       </section>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10">
         {properties.map((property) => (
           <PropertyCard key={property._id} property={property} />
         ))}
