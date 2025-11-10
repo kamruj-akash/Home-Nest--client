@@ -8,6 +8,7 @@ import WhyChooseUs from "./WhyChooseUs";
 const Home = () => {
   return (
     <>
+      {/* Banner */}
       <Banner />
       <Container>
         {/* Featured Properties */}

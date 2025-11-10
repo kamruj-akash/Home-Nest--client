@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Twitter } from "lucide-react";
+import { Facebook, Instagram, TwitchIcon, Twitter, X } from "lucide-react";
 import { Link } from "react-router";
 
 const Footer = () => {
@@ -102,7 +102,7 @@ const Footer = () => {
               rel="noreferrer"
               className="hover:text-white transition"
             >
-              <Instagram className="w-5 h-5" />
+              <TwitchIcon className="w-5 h-5" />
             </a>
           </div>
         </div>

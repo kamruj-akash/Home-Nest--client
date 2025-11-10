@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Puff } from "react-loader-spinner";
 import PropertyCard from "../../components/PropertyCard";
@@ -14,26 +15,34 @@ const FeaturedProperties = () => {
       .then((data) => setProperties(data.data));
   }, []);
 
-  if (properties.length == 0) {
-    return (
-      <div className="flex justify-center items-center">
-        <Puff
-          visible={true}
-          width="320"
-          height="320"
-          color="#0E5660"
-          ariaLabel="puff-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-        />
-      </div>
-    );
-  }
   return (
     <div className="my-30">
       <h1 className="text-center font-semibold text-2xl md:text-5xl mb-10">
         Newest Properties on the Market
       </h1>
+      {properties.length == 0 && (
+        <div className="flex mt-20 justify-center items-center flex-col">
+          <Puff
+            visible={true}
+            width="80"
+            height="80"
+            color="#0E5660"
+            ariaLabel="puff-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
+
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9 }}
+            className="text-black text-sm mt-5"
+          >
+            Loading your dream homes...
+          </motion.p>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
         {properties.map((property) => (
           <PropertyCard key={property._id} property={property} />

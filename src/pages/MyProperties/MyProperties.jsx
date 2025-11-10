@@ -2,7 +2,6 @@ import { EraserIcon, Home } from "lucide-react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router";
-import LoadingScreen from "../../components/LoadingScreen";
 import { useAuth } from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import MyPropertyCard from "./MyPropertyCard";
@@ -29,13 +28,9 @@ const MyProperties = () => {
     });
   };
 
-  if (myProperties.length == 0) {
-    return <LoadingScreen />;
-  }
-
   return (
     <>
-      <section className="bg-gray-50 min-h-screen py-14">
+      <section className="bg-gray-50 py-14">
         <div className="max-w-6xl mx-auto px-6">
           <div className="mb-10 text-center">
             <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800">

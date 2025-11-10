@@ -4,7 +4,7 @@ import { useAuth } from "./useAuth";
 const useAxiosSecure = () => {
   const { user } = useAuth();
   const instance = axios.create({
-    baseURL: "https://home-nest-server-wheat.vercel.app",
+    baseURL: "https://akash-home-nest-server.vercel.app",
   });
 
   instance.interceptors.request.use((config) => {

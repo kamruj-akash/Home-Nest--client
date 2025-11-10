@@ -1,7 +1,7 @@
 // src/components/Navbar.jsx
 import { Landmark, Menu } from "lucide-react";
 import toast from "react-hot-toast";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 import { useAuth } from "../hooks/useAuth";
 import Container from "./Container";
 
@@ -13,25 +13,60 @@ const Navbar = () => {
       .then(() => {
         toast.success("Logout Successful"), setLoading(false), setUser(null);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error(err.message));
   };
 
   const navItems = (
     <>
       <li>
-        <Link to="/">Home</Link>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "bg-cyan-900/10 text-cyan-800" : ""
+          }
+          to="/"
+        >
+          Home
+        </NavLink>
       </li>
       <li>
-        <Link to="/all-properties">All Properties</Link>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "bg-cyan-900/10 text-cyan-800" : ""
+          }
+          to="/all-properties"
+        >
+          All Properties
+        </NavLink>
       </li>
       <li>
-        <Link to="/add-properties">Add Properties</Link>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "bg-cyan-900/10 text-cyan-800" : ""
+          }
+          to="/add-properties"
+        >
+          Add Properties
+        </NavLink>
       </li>
       <li>
-        <Link to="/my-properties">My Properties</Link>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "bg-cyan-900/10 text-cyan-800" : ""
+          }
+          to="/my-properties"
+        >
+          My Properties
+        </NavLink>
       </li>
       <li>
-        <Link to="/my-ratings">My Ratings</Link>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "bg-cyan-900/10 text-cyan-800" : ""
+          }
+          to="/my-ratings"
+        >
+          My Ratings
+        </NavLink>
       </li>
     </>
   );
@@ -76,10 +111,6 @@ const Navbar = () => {
             </div>
           </div>
           <div className="navbar-end">
-            {/* <button onClick={logOutHandler} className="btn btn-ghost btn-circle">
-            <LogOut className="w-6 h-6 text-primary" />
-          </button> */}
-
             <div className="flex justify-center items-center gap-1">
               {loading ? (
                 <p>Loading...</p>

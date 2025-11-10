@@ -2,7 +2,7 @@ import axios from "axios";
 
 const useAxios = () => {
   const instance = axios.create({
-    baseURL: "https://home-nest-server-wheat.vercel.app",
+    baseURL: "https://akash-home-nest-server.vercel.app",
   });
   return instance;
 };

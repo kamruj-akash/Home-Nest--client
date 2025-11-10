@@ -5,7 +5,7 @@ const JourneyStart = () => {
   return (
     <section className="relative bg-[#0F5660] text-white py-40 overflow-hidden">
       {/* Decorative overlay (optional gradient) */}
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center opacity-20"></div>
+      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80')] bg-cover bg-center opacity-20"></div>
       <div className="absolute inset-0 bg-[#0F5660]/60"></div>
 
       {/* Content */}

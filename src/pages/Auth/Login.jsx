@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { useAuth } from "../../hooks/useAuth";
 
 const Login = () => {
-  const { googleLogin, setLoading } = useAuth();
+  const { googleLogin, setLoading, emailLogin } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -15,11 +15,22 @@ const Login = () => {
           setLoading(false),
           navigate(location.state || "/");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error(err.message));
   };
 
   const emailLoginHandler = (e) => {
     e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    emailLogin(email, password)
+      .then(() => {
+        toast.success("login success"),
+          setLoading(false),
+          navigate(location.state || "/");
+      })
+      .catch((err) => {
+        toast.error(err.message), setLoading(false), navigate("/login");
+      });
   };
 
   return (
@@ -52,7 +63,7 @@ const Login = () => {
           </div>
 
           {/* Form Fields */}
-          <form onClick={emailLoginHandler} className="space-y-5">
+          <form onSubmit={emailLoginHandler} className="space-y-5">
             <div className="form-control">
               <label className="label">
                 <span className="text-gray-700 font-medium flex items-center gap-1">
@@ -61,6 +72,7 @@ const Login = () => {
               </label>
               <input
                 type="email"
+                name="email"
                 placeholder="your@email.com"
                 className="input input-bordered w-full focus:border-[#0F5660] focus:ring-[#0F5660]"
               />
@@ -74,16 +86,14 @@ const Login = () => {
               </label>
               <input
                 type="password"
+                name="password"
                 placeholder="••••••••"
                 className="input input-bordered w-full focus:border-[#0F5660] focus:ring-[#0F5660]"
               />
             </div>
 
             <div className="form-control mt-4">
-              <button
-                type="button"
-                className="btn w-full bg-[#0F5660] hover:bg-[#134a51] text-white font-semibold text-base flex items-center justify-center gap-2"
-              >
+              <button className="btn w-full bg-[#0F5660] hover:bg-[#134a51] text-white font-semibold text-base flex items-center justify-center gap-2">
                 <LogIn className="w-5 h-5" /> Login
               </button>
             </div>

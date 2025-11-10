@@ -11,7 +11,7 @@ const Banner = () => {
     {
       id: 1,
       image:
-        "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=700&q=80",
+        "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=600&q=80",
       title: "Find Your Dream Home",
       description:
         "Explore exclusive listings and find the perfect place to call your own.",
@@ -20,7 +20,7 @@ const Banner = () => {
     {
       id: 3,
       image:
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=80",
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80",
       title: "Modern Living Starts Here",
       description:
         "Experience luxurious spaces with verified listings, curated for your lifestyle.",
@@ -29,7 +29,7 @@ const Banner = () => {
     {
       id: 2,
       image:
-        "https://plus.unsplash.com/premium_photo-1686090449192-4ab1d00cb735?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=700",
+        "https://plus.unsplash.com/premium_photo-1686090449192-4ab1d00cb735?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=600",
       title: "Modern Living Starts Here",
       description:
         "Experience luxurious spaces with verified listings, curated for your lifestyle.",
@@ -45,11 +45,11 @@ const Banner = () => {
         navigation
         pagination={{ clickable: true }}
         autoplay={{
-          delay: 4000,
+          delay: 2000,
           disableOnInteraction: false,
         }}
         loop={true}
-        className="w-full h-full rounded-xl overflow-hidden"
+        className="w-full h-full overflow-hidden"
       >
         {slides.map((slide) => (
           <SwiperSlide key={slide.id}>
@@ -57,7 +57,7 @@ const Banner = () => {
               <img
                 src={slide.image}
                 alt={slide.title}
-                className="w-full h-full object-cover brightness-[0.65]"
+                className="w-full h-full object-cover brightness-[0.50]"
               />
 
               <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4 md:px-10">

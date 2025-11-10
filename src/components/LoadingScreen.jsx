@@ -3,7 +3,7 @@ import { Home } from "lucide-react";
 
 const LoadingScreen = () => {
   return (
-    <div className="h-screen w-full flex flex-col items-center justify-center text-white overflow-hidden relative">
+    <div className="min-h-[calc(100vh-300px)] w-full flex flex-col items-center justify-center text-white overflow-hidden relative">
       <div className="absolute inset-0 bg-linear-to-b from-[#0F5660] to-[#092D31] opacity-90"></div>
 
       <div className="absolute w-72 h-72 bg-[#1FA1A8]/20 rounded-full blur-3xl -top-10 -left-20 animate-pulse"></div>
