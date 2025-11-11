@@ -5,7 +5,7 @@ const PropertyCard = ({ property, handleMyPropertyDelete }) => {
   const { _id, name, price, location, category, image, postedDate } = property;
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col">
+    <div className="bg-base-100 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col">
       {/* Image Section */}
       <div className="relative w-full h-56 overflow-hidden">
         <img
@@ -20,7 +20,9 @@ const PropertyCard = ({ property, handleMyPropertyDelete }) => {
 
       {/* Info Section */}
       <div className="p-5 flex-1">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-2">{name}</h2>
+        <h2 className="text-2xl font-semibold text-base-content mb-2">
+          {name}
+        </h2>
         <h3 className="text-xl font-medium text-gray-600 mb-2">৳ {price}</h3>
         <div className="flex justify-between items-center">
           <p className="text-gray-700 font-medium mb-1 flex items-center gap-1">

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Bars } from "react-loader-spinner";
 import { Link } from "react-router";
+import Swal from "sweetalert2";
 import { useAuth } from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import MyPropertyCard from "./MyPropertyCard";
@@ -23,11 +24,28 @@ const MyProperties = () => {
   }, [user]);
 
   const handleMyPropertyDelete = (id) => {
-    axiosSecure.delete(`/property/${id}`).then((data) => {
-      if (data.data.deletedCount) {
-        toast.success("Property is Deleted!");
-        const resData = myProperties.filter((item) => item._id != id);
-        setProperties(resData);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/property/${id}`).then((data) => {
+          if (data.data.deletedCount) {
+            toast.success("Property is Deleted!");
+            const resData = myProperties.filter((item) => item._id != id);
+            setProperties(resData);
+          }
+        });
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
       }
     });
   };

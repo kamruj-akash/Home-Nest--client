@@ -1,9 +1,9 @@
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
-import { Calendar, Mail, MapPin, User } from "lucide-react";
+import { Calendar, Home, Mail, MapPin, SearchX, User } from "lucide-react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import LoadingScreen from "../../components/LoadingScreen";
 import { useAuth } from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -18,9 +18,12 @@ const PropertyDetails = () => {
 
   useEffect(() => {
     setLoading(true);
-    axiosSecure.get(`/property/${paramsId}`).then((data) => {
-      setProperty(data.data), setLoading(false);
-    });
+    axiosSecure
+      .get(`/property/${paramsId}`)
+      .then((data) => {
+        setProperty(data.data), setLoading(false);
+      })
+      .catch(() => setLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -39,14 +42,41 @@ const PropertyDetails = () => {
       reviewDate: submissionTime,
     };
 
-    axiosSecure
-      .post("/ratings", newReview)
-      .then(() => toast.success("Review Submitted"));
-    setRating(0);
-    e.target.reset();
+    axiosSecure.post("/ratings", newReview).then(() => {
+      toast.success("Review Submitted"), setRating(0), e.target.reset();
+    });
   };
   if (loading) {
     return <LoadingScreen />;
+  }
+
+  if (property.length == 0) {
+    return (
+      <section className="flex flex-col items-center justify-center text-center min-h-[70vh] bg-gray-50 px-6">
+        <div className="relative mb-6">
+          <div className="w-24 h-24 bg-[#E7F3F4] rounded-full flex items-center justify-center mx-auto">
+            <SearchX className="w-12 h-12 text-[#0F5660]" />
+          </div>
+          <div className="absolute -bottom-2 right-[30%] bg-white rounded-full p-2 shadow-md">
+            <Home className="w-5 h-5 text-[#0F5660]" />
+          </div>
+        </div>
+        <h2 className="text-3xl font-bold text-gray-800 mb-3">
+          No Property Found
+        </h2>
+        <p className="text-gray-500 max-w-md mx-auto mb-8">
+          We couldn’t find any property details for this listing. It may have
+          been deleted or is no longer available. Please go back and explore
+          other listings.
+        </p>
+        <Link
+          to="/all-properties"
+          className="btn bg-[#0F5660] hover:bg-[#134a51] text-white font-semibold px-8 rounded-lg"
+        >
+          Browse Properties
+        </Link>
+      </section>
+    );
   }
   return (
     <>
@@ -74,7 +104,7 @@ const PropertyDetails = () => {
 
               <div className="mt-4 md:mt-0 text-right">
                 <p className="text-2xl font-bold text-[#0F5660]">
-                  ৳{property?.price}/month
+                  ৳{property?.price} {property?.category == "Rent" && "/month"}
                 </p>
                 <p className="text-sm text-gray-500">
                   For {property?.category}

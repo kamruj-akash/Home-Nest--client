@@ -3,8 +3,8 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Puff } from "react-loader-spinner";
-import PropertyCard from "../../components/PropertyCard";
 import useAxios from "../../hooks/useAxios";
+import FeaturedPropertiesCard from "./FeaturedPropertiesCard";
 
 const FeaturedProperties = () => {
   const axiosInstance = useAxios();
@@ -46,7 +46,7 @@ const FeaturedProperties = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
         {properties.map((property) => (
-          <PropertyCard key={property._id} property={property} />
+          <FeaturedPropertiesCard key={property._id} property={property} />
         ))}
       </div>
     </div>

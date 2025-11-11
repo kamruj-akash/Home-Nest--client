@@ -12,7 +12,7 @@ const MyRatingCard = ({ review, deleteReviewHandler, handleEdit }) => {
   });
 
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 p-4 flex gap-5 items-start mt-5">
+    <div className="bg-base-100 border border-gray-200 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 p-4 flex gap-5 items-start mt-5">
       <img
         src={propertyImage}
         alt={propertyName}
@@ -38,7 +38,7 @@ const MyRatingCard = ({ review, deleteReviewHandler, handleEdit }) => {
           </p>
         </div>
 
-        <h3 className="text-lg font-semibold text-gray-800 mt-2">
+        <h3 className="text-lg font-semibold text-base-content mt-2">
           {propertyName}
         </h3>
         <p className="text-gray-600 text-sm leading-relaxed mt-1">

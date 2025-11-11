@@ -1,9 +1,10 @@
 // src/components/Navbar.jsx
-import { Landmark, Menu, Moon, Sun, X } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FallingLines } from "react-loader-spinner";
 import { Link, NavLink } from "react-router";
+import logo from "../assets/log.png";
 import { useAuth } from "../hooks/useAuth";
 import Container from "./Container";
 
@@ -100,11 +101,9 @@ const Navbar = () => {
             </button>
             <Link to="/" className="flex items-center gap-2">
               <div className="avatar placeholder">
-                <div className="bg-teal-800 text-white rounded-full w-8">
-                  <span className="text-lg font-bold">
-                    <Landmark />
-                  </span>
-                </div>
+                {/* <div className="bg-teal-800 text-white rounded-full w-8"> */}
+                <img className="w-9" src={logo} alt="logo" />
+                {/* </div> */}
               </div>
               <span className="text-2xl font-bold text-[#0F5660]">
                 HomeNest

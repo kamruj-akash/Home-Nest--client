@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
+import AllPropertyCard from "../../components/AllPropertyCard";
 import LoadingScreen from "../../components/LoadingScreen";
-import PropertyCard from "../../components/PropertyCard";
 import useAxios from "../../hooks/useAxios";
 
 const AllProperties = () => {
@@ -56,7 +56,7 @@ const AllProperties = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10">
         {properties.map((property) => (
-          <PropertyCard key={property._id} property={property} />
+          <AllPropertyCard key={property._id} property={property} />
         ))}
       </div>
     </div>

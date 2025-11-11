@@ -45,8 +45,8 @@ const UpdateProperty = () => {
   };
 
   return (
-    <section className="bg-gray-50 min-h-screen py-14">
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-md p-8 md:p-10 border border-gray-100">
+    <section className="bg-base-300 min-h-screen py-14">
+      <div className="max-w-4xl mx-auto bg-base-100 rounded-2xl shadow-md p-8 md:p-10 border border-gray-100">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold text-[#0F5660] mb-2">
             Update Property
@@ -145,7 +145,7 @@ const UpdateProperty = () => {
               <input
                 readOnly
                 defaultValue={property.owner_name}
-                className="input input-bordered w-full bg-gray-100 cursor-not-allowed"
+                className="input input-bordered w-full bg-base-100 cursor-not-allowed"
               />
             </div>
             <div className="form-control">
@@ -155,7 +155,7 @@ const UpdateProperty = () => {
               <input
                 readOnly
                 defaultValue={property.owner_email}
-                className="input input-bordered w-full bg-gray-100 cursor-not-allowed"
+                className="input input-bordered w-full bg-base-100 cursor-not-allowed"
               />
             </div>
           </div>
