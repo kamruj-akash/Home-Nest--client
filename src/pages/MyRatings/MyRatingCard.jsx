@@ -12,13 +12,14 @@ const MyRatingCard = ({ review, deleteReviewHandler, handleEdit }) => {
   });
 
   return (
-    <div className="bg-base-100 border border-gray-200 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 p-4 flex gap-5 items-start mt-5">
-      <img
-        src={propertyImage}
-        alt={propertyName}
-        className="w-36 h-32 object-cover rounded-xl shrink-0"
-      />
-
+    <div className="bg-base-100 border border-gray-200 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 p-4  gap-5 items-start mt-5 flex flex-col md:flex-row">
+      <div>
+        <img
+          src={propertyImage}
+          alt={propertyName}
+          className="md:w-36 md:h-32 object-cover rounded-xl shrink-0"
+        />
+      </div>
       <div className="flex-1">
         <div className="flex items-center justify-between flex-wrap">
           <div className="flex items-center gap-1">

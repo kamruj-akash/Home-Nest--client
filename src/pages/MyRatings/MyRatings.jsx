@@ -108,14 +108,16 @@ const MyRatings = () => {
               )}
             </div>
           ) : (
-            reviews.map((review) => (
-              <MyRatingCard
-                key={review._id}
-                review={review}
-                handleEdit={handleEdit}
-                deleteReviewHandler={deleteReviewHandler}
-              />
-            ))
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+              {reviews.map((review) => (
+                <MyRatingCard
+                  key={review._id}
+                  review={review}
+                  handleEdit={handleEdit}
+                  deleteReviewHandler={deleteReviewHandler}
+                />
+              ))}
+            </div>
           )}
         </div>
       </div>
