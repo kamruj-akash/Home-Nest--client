@@ -2,7 +2,7 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Puff } from "react-loader-spinner";
+import { Bars } from "react-loader-spinner";
 import useAxios from "../../hooks/useAxios";
 import FeaturedPropertiesCard from "./FeaturedPropertiesCard";
 
@@ -23,14 +23,14 @@ const FeaturedProperties = () => {
       </h1>
       {properties.length == 0 && (
         <div className="flex mt-20 justify-center items-center flex-col">
-          <Puff
-            visible={true}
-            width="80"
+          <Bars
             height="80"
+            width="80"
             color="#0E5660"
-            ariaLabel="puff-loading"
+            ariaLabel="bars-loading"
             wrapperStyle={{}}
             wrapperClass=""
+            visible={true}
           />
 
           <motion.p
@@ -39,7 +39,7 @@ const FeaturedProperties = () => {
             transition={{ delay: 0.9 }}
             className="text-black text-sm mt-5"
           >
-            Loading your dream homes...
+            Loading your dream homes
           </motion.p>
         </div>
       )}

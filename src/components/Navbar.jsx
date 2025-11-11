@@ -1,4 +1,3 @@
-// src/components/Navbar.jsx
 import { Menu, Moon, Sun, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";

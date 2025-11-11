@@ -1,25 +1,19 @@
-import { Facebook, Instagram, TwitchIcon, Twitter, X } from "lucide-react";
+import { Facebook, TwitchIcon, Twitter } from "lucide-react";
 import { Link } from "react-router";
-
+import logo from "../assets/log.png";
 const Footer = () => {
   return (
     <footer className="bg-[#0B1320] text-gray-300 pt-14 pb-6">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10 border-b border-gray-700 pb-10">
-        {/* Brand Info */}
-        <div>
-          <Link
-            to="/"
-            className="text-2xl font-bold text-white flex items-center gap-2 mb-3"
-          >
-            🏠 HomeNest
-          </Link>
+        <div className="flex flex-col gap-y-5 justify-center text-center">
+          <img src={logo} className="w-20 h-20 mx-auto" alt="logo" />
+
           <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
             Making your home buying and selling experience simple and
             successful.
           </p>
         </div>
 
-        {/* Quick Links */}
         <div>
           <h3 className="text-white font-semibold mb-3">Quick Links</h3>
           <ul className="space-y-2 text-sm">
@@ -46,7 +40,6 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Support */}
         <div>
           <h3 className="text-white font-semibold mb-3">Support</h3>
           <ul className="space-y-2 text-sm">
@@ -76,7 +69,6 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Follow Us */}
         <div>
           <h3 className="text-white font-semibold mb-3">Follow Us</h3>
           <div className="flex gap-4">
@@ -108,7 +100,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom line */}
       <div className="max-w-7xl mx-auto px-6 text-center pt-6">
         <p className="text-gray-500 text-sm">
           © {new Date().getFullYear()}{" "}
