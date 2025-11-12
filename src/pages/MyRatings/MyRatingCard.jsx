@@ -1,8 +1,15 @@
-import { Edit, Star, Trash2 } from "lucide-react";
+import { Edit, Star, Trash2, User } from "lucide-react";
 
 const MyRatingCard = ({ review, deleteReviewHandler, handleEdit }) => {
-  const { _id, propertyName, propertyImage, rating, reviewDesc, reviewDate } =
-    review;
+  const {
+    _id,
+    propertyName,
+    propertyImage,
+    rating,
+    reviewDesc,
+    reviewDate,
+    reviewer,
+  } = review;
 
   // Format the review date
   const formattedDate = new Date(reviewDate).toLocaleDateString("en-US", {
@@ -43,7 +50,9 @@ const MyRatingCard = ({ review, deleteReviewHandler, handleEdit }) => {
           {propertyName}
         </h3>
         <p className="text-gray-600 text-sm leading-relaxed mt-1">
-          {reviewDesc}
+          {reviewDesc?.length > 100
+            ? reviewDesc.slice(0, 100) + "..."
+            : reviewDesc}
         </p>
 
         <div className="flex gap-3 mt-4">
@@ -59,6 +68,11 @@ const MyRatingCard = ({ review, deleteReviewHandler, handleEdit }) => {
           >
             <Trash2 className="w-4 h-4" /> Delete
           </button>
+          <div>
+            <h1 className="flex flex-1">
+              <User /> {reviewer}
+            </h1>
+          </div>
         </div>
       </div>
     </div>

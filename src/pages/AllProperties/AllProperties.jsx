@@ -8,17 +8,25 @@ import useAxios from "../../hooks/useAxios";
 const AllProperties = () => {
   const axios = useAxios();
   const [properties, setProperties] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
-    axios.get("/all-properties").then((data) => setProperties(data.data));
+    axios.get("/all-properties").then((res) => {
+      setProperties(res.data);
+    });
   }, []);
 
-  if (properties.length == 0) {
+  const filteredProperties = properties.filter((item) => {
+    if (!searchValue) return true;
+    return item?.name?.toLowerCase().includes(searchValue.toLowerCase());
+  });
+
+  if (properties.length === 0) {
     return <LoadingScreen />;
   }
 
   return (
-    <div className="max-w-7xl mx-auto ">
+    <div className="max-w-7xl mx-auto">
       <section className="bg-base-100 py-12">
         <div>
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
@@ -32,13 +40,16 @@ const AllProperties = () => {
               </p>
             </div>
           </div>
-          <div className="relative flex justify-between items-center ">
-            <div className="w-[320px] md:w-2xl">
+
+          <div className="relative flex justify-between items-center">
+            <div className="w-[320px] md:w-2xl relative">
               <Search className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
               <input
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
                 type="text"
                 placeholder="Search by property name or address..."
-                className="w-full pl-12 pr-4 py-3 rounded-lg bg-base-300 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0F5660] "
+                className="w-full pl-12 pr-4 py-3 rounded-lg bg-base-300 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0F5660]"
               />
             </div>
 
@@ -55,9 +66,15 @@ const AllProperties = () => {
       </section>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10">
-        {properties.map((property) => (
-          <AllPropertyCard key={property._id} property={property} />
-        ))}
+        {filteredProperties.length > 0 ? (
+          filteredProperties.map((property) => (
+            <AllPropertyCard key={property._id} property={property} />
+          ))
+        ) : (
+          <p className="col-span-full text-center text-gray-500">
+            No properties found.
+          </p>
+        )}
       </div>
     </div>
   );

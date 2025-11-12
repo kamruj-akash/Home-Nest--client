@@ -12,7 +12,8 @@ const MyRatings = () => {
   const { user } = useAuth();
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [catchError, setCatchError] = useState(null);
+  // const [catchError, setCatchError] = useState(null);
+  console.log(reviews);
 
   const deleteReviewHandler = (id) => {
     Swal.fire({
@@ -44,12 +45,10 @@ const MyRatings = () => {
 
   useEffect(() => {
     setLoading(true);
-    axiosSecure
-      .get(`/ratings?email=${user?.email}`)
-      .then((data) => {
-        setReviews(data.data), setLoading(false);
-      })
-      .catch((err) => setCatchError(err));
+    axiosSecure.get(`/ratings?email=${user?.email}`).then((data) => {
+      setReviews(data.data), setLoading(false);
+    });
+    // .catch((err) => setCatchError(err));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
